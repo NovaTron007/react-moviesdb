@@ -1,5 +1,11 @@
 import React from "react";
+import { StyledLoadMoreBtn } from "../styles/StyledLoadMoreBtn";
 
-const LoadMore = () => <div>LoadMoreBtn</div>;
+// receive and destructure props
+const LoadMoreBtn = ({ text, callback }) => (
+  <StyledLoadMoreBtn type="button" onClick={callback}>
+    {text}
+  </StyledLoadMoreBtn>
+);
 
-export default LoadMore;
+export default LoadMoreBtn;

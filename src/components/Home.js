@@ -27,6 +27,18 @@ const Home = () => {
 
   const [searchTerm, setSearchTerm] = useState(""); // search state
 
+  const loadMoreMovies = () => {
+    // condition for endpoint
+    // send either endpoint depending on contents of url
+    // set params for api: search or popular endpoints
+    const searchEndPoint = `${API_URL}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${currentPage + 1}`;
+    const popularEndPoint = `${API_URL}movie/popular?api_key=${API_KEY}&page=${currentPage + 1}`;
+
+    const endpoint = searchTerm ? searchEndPoint : popularEndPoint;
+
+    // pass endpoint to fetchMovies in custom hook
+    fetchMovies(endpoint);
+  };
   console.log(movies);
 
   if (error) return <div>An error occurred!</div>;
@@ -42,9 +54,10 @@ const Home = () => {
           <MovieThumb key={movie.id} clickable image={movie.poster_path ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}` : NoImage} movieId={movie.id} movieName={movie.original_title} />
         ))}
       </Grid>
-      <MovieThumb />
-      <LoadMoreBtn />
-      <Spinner />
+
+      {/* if loading show spinner component */}
+      {loading && <Spinner />}
+      {currentPage < totalPages && !loading && <LoadMoreBtn text="load more" callback={loadMoreMovies} />}
     </>
   );
 };
