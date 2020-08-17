@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API_URL, API_KEY } from "../../config";
+import { POPULAR_BASE_URL } from "../../config";
 
 // custom hook
 export const useHomeFetch = () => {
@@ -41,7 +41,7 @@ export const useHomeFetch = () => {
 
   // useEffect: run on render and get movies
   useEffect(() => {
-    fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`);
+    fetchMovies(POPULAR_BASE_URL);
   }, []); // dependency if any, run once on mount
 
   return [{ state, loading, error }, fetchMovies]; // for use inside home component
