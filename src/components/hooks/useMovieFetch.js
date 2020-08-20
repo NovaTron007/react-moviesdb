@@ -35,8 +35,20 @@ export const useMovieFetch = movieId => {
 
   // run on render: get movie data using fetch
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-  // return used for custom hook
+    // get data from localStorage if it is set
+    if (localStorage[movieId]) {
+      console.log("Grabbing from storage...");
+      setState(JSON.parse(localStorage[movieId]));
+      setLoading(false);
+    } else {
+      console.log("Grabbing from api");
+      fetchData();
+    }
+  }, [fetchData, movieId]); // return used for custom hook
+
+  // set localStorage
+  useEffect(() => {
+    localStorage.setItem(movieId, JSON.stringify(state));
+  }, [movieId, state]);
   return [state, loading, error];
 };

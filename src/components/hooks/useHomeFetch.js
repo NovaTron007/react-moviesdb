@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { POPULAR_BASE_URL } from "../../config";
 
 // custom hook
-export const useHomeFetch = () => {
+export const useHomeFetch = searchTerm => {
   // set state
   const [state, setState] = useState({ movies: [] });
   const [loading, setLoading] = useState(false);
@@ -41,8 +41,24 @@ export const useHomeFetch = () => {
 
   // useEffect: run on render and get movies
   useEffect(() => {
-    fetchMovies(POPULAR_BASE_URL);
+    if (sessionStorage.homeState) {
+      console.log("Grabbing from session storage...");
+      setState(JSON.parse(sessionStorage.homeState));
+      setLoading(false);
+    } else {
+      console.log("Grabbing from API...");
+      fetchMovies(POPULAR_BASE_URL);
+    }
   }, []); // dependency if any, run once on mount
+
+  // localStorage
+  useEffect(() => {
+    // get storage if none set
+    if (!searchTerm) {
+      console.log("Writing to sessionStorage...");
+      sessionStorage.setItem("homeState", JSON.stringify(state));
+    }
+  }, [searchTerm, state]);
 
   return [{ state, loading, error }, fetchMovies]; // for use inside home component
 };

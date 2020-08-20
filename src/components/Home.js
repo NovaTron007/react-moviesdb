@@ -15,6 +15,8 @@ import { useHomeFetch } from "./hooks/useHomeFetch";
 import NoImage from "./images/no_image.jpg";
 
 const Home = () => {
+  const [searchTerm, setSearchTerm] = useState(""); // search state
+
   const [
     {
       // destructure, state 2nd level destructure
@@ -23,9 +25,7 @@ const Home = () => {
       error
     },
     fetchMovies
-  ] = useHomeFetch();
-
-  const [searchTerm, setSearchTerm] = useState(""); // search state
+  ] = useHomeFetch(searchTerm); // send searchTerm to useHomeFetch for storage
 
   // SEARCHMOVIES: if have search term, use search api url, or use popular
   const searchMovies = search => {
