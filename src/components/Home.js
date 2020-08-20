@@ -58,6 +58,7 @@ const Home = () => {
       <SearchBar callback={searchMovies} />
       <Grid header={searchTerm ? "Search Result" : "Popular Movies"}>
         {movies.map(movie => (
+          // will show movie MovieThumb when clicked
           <MovieThumb key={movie.id} clickable image={movie.poster_path ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}` : NoImage} movieId={movie.id} movieName={movie.original_title} />
         ))}
       </Grid>

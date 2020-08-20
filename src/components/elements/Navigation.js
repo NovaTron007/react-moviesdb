@@ -1,0 +1,20 @@
+import React from "react";
+import { Link } from "@reach/router";
+
+import { StyledNavigation } from "../styles/StyledNavigation";
+
+function Navigation({ movie }) {
+  return (
+    <>
+      <StyledNavigation>
+        <div className="navigation-content">
+          <Link to="/">
+            <p>Home | {movie}</p>
+          </Link>
+        </div>
+      </StyledNavigation>
+    </>
+  );
+}
+
+export default Navigation;
