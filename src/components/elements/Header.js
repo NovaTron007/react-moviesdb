@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
+
 // import resources
 import RMDBLogo from "../images/reactMovie_logo.png";
 import TMDBLogo from "../images/tmdb_logo.svg";

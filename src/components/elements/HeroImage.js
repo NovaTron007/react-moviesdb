@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import { StyledHeroImage } from "../styles/StyledHeroImage"; // styled component
 
 // receive props from Home.js
@@ -13,5 +15,12 @@ const HeroImage = ({ image, title, text }) => (
     </div>
   </StyledHeroImage>
 );
+
+// validate proptypes
+HeroImage.propTypes = {
+  image: PropTypes.string,
+  title: PropTypes.string,
+  text: PropTypes.string
+};
 
 export default HeroImage;

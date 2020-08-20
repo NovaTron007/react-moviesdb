@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import NoImage from "../images/no_image.jpg";
 import { IMAGE_BASE_URL, POSTER_SIZE } from "../../config";
@@ -11,7 +12,7 @@ function MovieInfo({ movie }) {
       <div className="movieinfo-content">
         <div className="movieinfo-thumb">
           {/* show movie thumbnail */}
-          <MovieThumb image={movie.poster_path ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}` : NoImage} clickable="false"></MovieThumb>
+          <MovieThumb image={movie.poster_path ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}` : NoImage} clickable={false}></MovieThumb>
         </div>
         <div className="movieinfo-text">
           <h1>{movie.title}</h1>
@@ -36,5 +37,11 @@ function MovieInfo({ movie }) {
     </StyledMovieInfo>
   );
 }
+
+// validate proptypes
+MovieInfo.propTypes = {
+  movie: PropTypes.object,
+  directors: PropTypes.array
+};
 
 export default MovieInfo;
